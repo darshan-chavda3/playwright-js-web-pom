@@ -5,16 +5,19 @@ import { defineConfig, devices } from '@playwright/test';
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-    testDir: '/src/tests',
+    testDir: './src/tests',
     fullyParallel: true,
+    timeout: 60 * 1000,
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 0,
     workers: process.env.CI ? 1 : undefined,
-    reporter: [['html'], ['list']],
+    reporter: [['html'], ['list', { open: 'on-failure' }]],
     use: {
-        // baseURL: 'http://127.0.0.1:3000',
+        baseURL: 'https://www.saucedemo.com',
         trace: 'on-first-retry',
-        headless: false,
+        headless: true,
+        actionTimeout: 60 * 1000,
+        navigationTimeout: 60 * 1000,
     },
 
     projects: [
