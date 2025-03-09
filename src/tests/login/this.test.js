@@ -9,7 +9,7 @@ test.describe('[@Feature-Login] Verify Login Page test scenarios', () => {
 
         // Login with valid credentials
         await pages.loginPage.gotoLoginPage();
-        await pages.loginPage.loginWithValidCredentials(loginData.userName, loginData.password);
+        await pages.loginPage.loginWithValidCredentials(loginData.validData.userName, loginData.validData.password);
         await expect(page).toHaveURL('/inventory.html');
 
         // Log out to page
@@ -22,7 +22,7 @@ test.describe('[@Feature-Login] Verify Login Page test scenarios', () => {
 
         // Login with invalid credentials
         await pages.loginPage.gotoLoginPage();
-        await pages.loginPage.loginWithValidCredentials('user_123', 'secret_123');
+        await pages.loginPage.loginWithValidCredentials(loginData.invalidData.userName, loginData.invalidData.password);
         await expect(page).not.toHaveURL('/inventory.html');
 
         // Verify error message
